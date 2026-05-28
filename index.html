@@ -28,6 +28,21 @@
 
   <!-- ── HERO ─────────────────────────────── -->
   <section id="hero">
+    <canvas id="heroCanvas"></canvas>
+    
+    <div class="tracker-panel left">
+      <div class="tracker-label">SYS.LOC</div>
+      <div class="tracker-val">X: <span id="trkX">0000</span></div>
+      <div class="tracker-val">Y: <span id="trkY">0000</span></div>
+      <div class="tracker-bar"></div>
+    </div>
+    
+    <div class="tracker-panel right">
+      <div class="tracker-label">NET.STATUS</div>
+      <div class="tracker-val">IDLE</div>
+      <div class="tracker-bar"></div>
+    </div>
+
     <div class="hero-inner">
       <p class="hero-eyebrow">ISTE Student Chapter MEC &nbsp;×&nbsp; Marian Engineering College &nbsp;×&nbsp; Marian Edu
         City</p>
@@ -345,9 +360,10 @@
     // Random glitch on hero title
     const ht = document.querySelector('.hero-title');
     function rg() {
-      ht.style.filter = 'hue-rotate(' + (Math.random() * 20) + 'deg) brightness(1.1)';
-      setTimeout(() => ht.style.filter = '', 100);
-      setTimeout(rg, 2500 + Math.random() * 5000);
+      ht.style.filter = `hue-rotate(${Math.random() * 90}deg) brightness(1.2) contrast(1.5) blur(1px)`;
+      ht.style.transform = `translate(${Math.random() * 10 - 5}px, ${Math.random() * 10 - 5}px) skewX(${Math.random() * 15 - 7.5}deg)`;
+      setTimeout(() => { ht.style.filter = ''; ht.style.transform = ''; }, 100);
+      setTimeout(rg, 1000 + Math.random() * 3000);
     }
     rg();
 
@@ -437,6 +453,155 @@
       document.getElementById("cdMins").innerText = minutes.toString().padStart(2, '0');
       document.getElementById("cdSecs").innerText = seconds.toString().padStart(2, '0');
     }, 1000);
+    // Unexpected Side Glitches
+    function spawnSideGlitch(side) {
+      const glitch = document.createElement('div');
+      glitch.style.position = 'fixed';
+      glitch.style.zIndex = '9998'; 
+      glitch.style.background = Math.random() > 0.5 ? 'var(--red)' : '#111';
+      if (Math.random() > 0.8) glitch.style.background = '#00ffff'; // cyan pop
+      
+      glitch.style.width = (Math.random() * 300 + 50) + 'px';
+      glitch.style.height = (Math.random() * 15 + 3) + 'px';
+      glitch.style.top = (Math.random() * 100) + 'vh';
+      glitch.style.pointerEvents = 'none';
+      
+      if (side === 'left') {
+        glitch.style.left = '0';
+        glitch.style.right = 'auto';
+        glitch.style.clipPath = 'polygon(0 0, 100% 0, 90% 100%, 0 100%)';
+      } else {
+        glitch.style.right = '0';
+        glitch.style.left = 'auto';
+        glitch.style.clipPath = 'polygon(10% 0, 100% 0, 100% 100%, 0 100%)';
+      }
+      
+      document.body.appendChild(glitch);
+      
+      // Jitter effect
+      const jitter = setInterval(() => {
+        glitch.style.transform = `translateY(${Math.random() * 20 - 10}px)`;
+        glitch.style.opacity = Math.random() > 0.5 ? '1' : '0.2';
+      }, 40);
+      
+      // Remove quickly
+      setTimeout(() => {
+        clearInterval(jitter);
+        glitch.remove();
+      }, 150 + Math.random() * 400);
+    }
+
+    function triggerGlitches() {
+      // Spawn 1 to 3 glitches at once
+      const count = Math.floor(Math.random() * 3) + 1;
+      for(let i=0; i<count; i++) {
+        spawnSideGlitch(Math.random() > 0.5 ? 'left' : 'right');
+      }
+      // Schedule next burst very frequently
+      setTimeout(triggerGlitches, 500 + Math.random() * 2000);
+    }
+    triggerGlitches();
+
+    // Live Coordinate Trackers
+    const trkX = document.getElementById('trkX');
+    const trkY = document.getElementById('trkY');
+
+    // Hero Canvas Particle Network
+    const canvas = document.getElementById('heroCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    const mouse = { x: null, y: null };
+
+    function resize() {
+      if(!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = document.getElementById('hero').offsetHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 1.5 + 0.5;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(200, 0, 0, 0.5)';
+        ctx.fill();
+      }
+    }
+
+    const pCount = window.innerWidth > 800 ? 80 : 30;
+    for (let i = 0; i < pCount; i++) particles.push(new Particle());
+
+    document.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY + window.scrollY; // adjust for scroll
+      
+      if(trkX && trkY) {
+        trkX.innerText = e.clientX.toString().padStart(4, '0');
+        trkY.innerText = e.clientY.toString().padStart(4, '0');
+      }
+    });
+    
+    document.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    function animateCanvas() {
+      if(!canvas) return;
+      ctx.clearRect(0, 0, width, height);
+      
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(0, 0, 0, ${0.15 - dist/800})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+        
+        if (mouse.x != null && mouse.y != null) {
+          const dx = particles[i].x - mouse.x;
+          const dy = particles[i].y - mouse.y; 
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < 180) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(200, 0, 0, ${0.4 - dist/450})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateCanvas);
+    }
+    animateCanvas();
   </script>
 </body>
 

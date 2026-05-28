@@ -27,18 +27,28 @@
   .nav-cta{background:transparent;border:1px solid var(--red);color:var(--red);font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1.25rem;cursor:pointer;transition:all .2s;text-decoration:none}
   .nav-cta:hover{background:var(--red);color:#fff}
 
-  #hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;overflow:hidden}
-  .hero-inner{position:relative}
+  #hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;overflow:hidden;position:relative}
+  .hero-inner{position:relative; z-index: 2;}
+  
+  #heroCanvas { position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity: 0.7; }
+  
+  .tracker-panel { position:absolute; top:50%; transform:translateY(-50%); width: 40px; display:flex; flex-direction:column; align-items:center; gap: 1.5rem; opacity: 0.6; transition: opacity 0.3s; z-index:1;}
+  .tracker-panel:hover { opacity: 1; }
+  .tracker-panel.left { left: 20px; }
+  .tracker-panel.right { right: 20px; }
+  .tracker-label { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--mono); font-size: 0.6rem; color: var(--red); letter-spacing: 0.2em; font-weight: bold; margin-bottom: 1rem; white-space: nowrap;}
+  .tracker-val { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--mono); font-size: 0.7rem; color: #111; letter-spacing: 0.1em; font-weight: bold; }
+  .tracker-bar { width: 2px; height: 100px; background: linear-gradient(to bottom, var(--red), transparent); margin-top: 1rem;}
   
   .hero-eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.3em;color:var(--red);text-transform:uppercase;margin-bottom:1.5rem;opacity:.85;font-weight:bold;}
   
   /* Glitch Text adapted for light theme */
   .hero-title{font-family:var(--display);font-size:clamp(5rem,14vw,12rem);line-height:.9;color:#222;position:relative;display:inline-block;letter-spacing:.02em;text-shadow:4px 4px 0px rgba(0,0,0,0.1)}
   .hero-title::before,.hero-title::after{content:'HARDWIRED';position:absolute;inset:0;font-family:var(--display);font-size:inherit;line-height:inherit;letter-spacing:inherit}
-  .hero-title::before{color:var(--red);animation:glitch1 4s infinite;clip-path:polygon(0 15%,100% 15%,100% 35%,0 35%)}
-  .hero-title::after{color:#555;animation:glitch2 4s infinite;clip-path:polygon(0 58%,100% 58%,100% 72%,0 72%);opacity:.6}
-  @keyframes glitch1{0%,93%,100%{transform:none;opacity:0}94%{transform:translate(-5px,0);opacity:.9}96%{transform:translate(5px,-2px);opacity:.9}98%{transform:translate(-2px,1px);opacity:.9}}
-  @keyframes glitch2{0%,95%,100%{transform:none;opacity:0}96%{transform:translate(4px,1px);opacity:.8}98%{transform:translate(-4px,0);opacity:.8}}
+  .hero-title::before{color:var(--red);animation:glitch1 2.5s infinite;clip-path:polygon(0 15%,100% 15%,100% 35%,0 35%)}
+  .hero-title::after{color:rgba(0,0,255,0.8);animation:glitch2 3s infinite;clip-path:polygon(0 58%,100% 58%,100% 72%,0 72%);opacity:.8}
+  @keyframes glitch1{0%,85%,100%{transform:none;opacity:0}88%{transform:translate(-10px,4px) skewX(-10deg);opacity:1}92%{transform:translate(12px,-6px) skewX(15deg);opacity:1}96%{transform:translate(-8px,2px) skewX(-5deg);opacity:1}}
+  @keyframes glitch2{0%,88%,100%{transform:none;opacity:0}90%{transform:translate(8px,5px) skewX(10deg);opacity:.9}94%{transform:translate(-12px,-3px) skewX(-15deg);opacity:.9}98%{transform:translate(6px,2px) skewX(5deg);opacity:.9}}
   
   .hero-image-container{position:relative;max-width:400px;margin:2rem auto;border:1px dashed rgba(0,0,0,.2);padding:10px;background:rgba(255,255,255,0.5)}
   .hero-image{width:100%;height:auto;filter:grayscale(1) contrast(1.2);mix-blend-mode:multiply;transition:all 0.3s ease;}
@@ -247,7 +257,7 @@
     .special-prizes{grid-template-columns:1fr 1fr}
     .nav-links{display:none}
     .sponsors-row{flex-direction:column}
-    .warning-box{display:none}
+    .warning-box, .tracker-panel{display:none}
     .countdown { gap: .5rem; margin-bottom: 2rem;}
     .cd-box { min-width: 65px; padding: .5rem; }
     .cd-num { font-size: 2rem; }
