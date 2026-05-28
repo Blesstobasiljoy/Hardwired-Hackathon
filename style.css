@@ -156,6 +156,22 @@
   .reg-input:focus{border-color:var(--red);background:#fff}
   .register-note{font-family:var(--mono);font-size:.58rem;color:#888;letter-spacing:.1em;text-transform:uppercase;line-height:2;font-weight:bold}
 
+  #contact{padding:6rem 0}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+  .contact-info{background:#fff;border:2px solid rgba(0,0,0,.15);padding:3rem;display:flex;flex-direction:column;gap:2rem;box-shadow:4px 4px 0 rgba(0,0,0,0.05)}
+  .contact-block h3{font-family:var(--mono);font-size:.8rem;letter-spacing:.2em;color:var(--red);text-transform:uppercase;margin-bottom:1rem;font-weight:bold}
+  .contact-block p{font-size:1.05rem;color:#333;line-height:1.7;font-weight:600}
+  .contact-email{margin-top:1rem;font-size:.9rem}
+  .contact-email a{color:#111;text-decoration:none;border-bottom:1px solid var(--red)}
+  .contact-block ul{list-style:none}
+  .contact-block li{font-family:var(--mono);font-size:.85rem;color:#444;margin-bottom:.75rem;letter-spacing:.05em;font-weight:bold}
+  .contact-block li a{color:#111;text-decoration:none;transition:color .2s}
+  .contact-block li a:hover{color:var(--red)}
+  .map-container{border:2px solid rgba(0,0,0,.15);background:#fff;padding:1rem;box-shadow:4px 4px 0 rgba(0,0,0,0.05);display:flex;flex-direction:column}
+  .map-title{font-family:var(--mono);font-size:.8rem;letter-spacing:.2em;color:#111;text-transform:uppercase;margin-bottom:1rem;font-weight:bold;text-align:center}
+  .map-container iframe{filter:grayscale(0.8) contrast(1.2);flex:1;min-height:300px;width:100%;transition:filter .3s}
+  .map-container iframe:hover{filter:grayscale(0)}
+
   footer{padding:2rem;border-top:1px solid rgba(0,0,0,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;position:relative;z-index:1;background:#fff}
   .footer-left{font-family:var(--mono);font-size:.6rem;color:#666;letter-spacing:.1em;text-transform:uppercase;font-weight:bold}
   .footer-logo{font-family:var(--display);font-size:1.2rem;color:#111;letter-spacing:3px}
