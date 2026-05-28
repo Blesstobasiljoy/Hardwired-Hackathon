@@ -49,11 +49,18 @@
 
       <p class="hero-tagline"><em>36 hours.</em> No shortcuts.<br>Just raw engineering under pressure.</p>
       <div class="hero-badges">
-        <span class="badge">36 Hours</span>
-        <span class="badge">State Level</span>
-        <span class="badge">Open Track</span>
-        <span class="badge">Coming Soon</span>
-      </div>
+      <span class="badge">36 Hours</span>
+      <span class="badge">State Level</span>
+      <span class="badge">Open Track</span>
+      <span class="badge">Coming Soon</span>
+    </div>
+    
+    <div class="countdown" id="heroCountdown">
+      <div class="cd-box"><span class="cd-num" id="cdDays">00</span><span class="cd-label">Days</span></div>
+      <div class="cd-box"><span class="cd-num" id="cdHours">00</span><span class="cd-label">Hours</span></div>
+      <div class="cd-box"><span class="cd-num" id="cdMins">00</span><span class="cd-label">Mins</span></div>
+      <div class="cd-box"><span class="cd-num" id="cdSecs">00</span><span class="cd-label">Secs</span></div>
+    </div>
       <div class="hero-cta">
         <a href="#register" class="btn-primary">Register Now</a>
         <a href="#about" class="btn-outline">Explore</a>
@@ -407,6 +414,29 @@
     }, {threshold: 0.8});
 
     document.querySelectorAll('.section-title').forEach(el => scrambleObserver.observe(el));
+
+    // Countdown Timer
+    const targetDate = new Date("July 17, 2026 09:00:00").getTime();
+    const timerInterval = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        clearInterval(timerInterval);
+        document.getElementById("heroCountdown").innerHTML = "<div class='cd-box' style='width:100%;padding:1rem;'><span class='cd-num' style='color:var(--red)'>HACKATHON LIVE</span></div>";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("cdDays").innerText = days.toString().padStart(2, '0');
+      document.getElementById("cdHours").innerText = hours.toString().padStart(2, '0');
+      document.getElementById("cdMins").innerText = minutes.toString().padStart(2, '0');
+      document.getElementById("cdSecs").innerText = seconds.toString().padStart(2, '0');
+    }, 1000);
   </script>
 </body>
 
