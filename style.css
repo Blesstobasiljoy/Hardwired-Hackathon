@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Terminator Real NFI';
+  src: url('./Terminator-Real-NFI.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
     --red:#CC0000;--red2:#ff2222;
@@ -43,8 +49,8 @@
   .hero-eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.3em;color:var(--red);text-transform:uppercase;margin-bottom:1.5rem;opacity:.85;font-weight:bold;}
   
   /* Glitch Text adapted for light theme */
-  .hero-title{font-family:var(--display);font-size:clamp(5rem,14vw,12rem);line-height:.9;color:#222;position:relative;display:inline-block;letter-spacing:.02em;text-shadow:4px 4px 0px rgba(0,0,0,0.1)}
-  .hero-title::before,.hero-title::after{content:'HARDWIRED';position:absolute;inset:0;font-family:var(--display);font-size:inherit;line-height:inherit;letter-spacing:inherit}
+  .hero-title{font-family:'Terminator Real NFI', sans-serif;font-size:clamp(5rem,14vw,12rem);line-height:.9;color:#222;position:relative;display:inline-block;letter-spacing:.02em;text-shadow:4px 4px 0px rgba(0,0,0,0.1)}
+  .hero-title::before,.hero-title::after{content:'HARDWIRED';position:absolute;inset:0;font-family:'Terminator Real NFI', sans-serif;font-size:inherit;line-height:inherit;letter-spacing:inherit}
   .hero-title::before{color:var(--red);animation:glitch1 2.5s infinite;clip-path:polygon(0 15%,100% 15%,100% 35%,0 35%)}
   .hero-title::after{color:rgba(0,0,255,0.8);animation:glitch2 3s infinite;clip-path:polygon(0 58%,100% 58%,100% 72%,0 72%);opacity:.8}
   @keyframes glitch1{0%,85%,100%{transform:none;opacity:0}88%{transform:translate(-10px,4px) skewX(-10deg);opacity:1}92%{transform:translate(12px,-6px) skewX(15deg);opacity:1}96%{transform:translate(-8px,2px) skewX(-5deg);opacity:1}}
