@@ -188,42 +188,59 @@
         <h2 class="section-title">Win <span>Big</span></h2>
       </div>
       <div class="divider"></div>
-      <div class="prizes-grid">
-        <div class="prize-card">
-          <div class="prize-rank">// RANK 01</div>
-          <div class="prize-place">First Place</div>
-          <div class="prize-amount gold">₹TBA</div>
-          <div class="prize-perks">
-            <div class="perk">Cash Prize + Trophy</div>
-            <div class="perk">Certificates of Excellence</div>
-            <div class="perk">Internship Opportunities</div>
-            <div class="perk">Mentorship Access</div>
+      <div class="podium-wrapper">
+        <!-- 2nd Place -->
+        <div class="podium-slot second">
+          <div class="podium-card">
+            <div class="podium-medal">🥈</div>
+            <div class="podium-rank">// RANK 02</div>
+            <div class="podium-place">Second Place</div>
+            <div class="prize-amount silver">₹15,000</div>
+            <div class="podium-perks">
+              <div class="perk">Cash Prize + Trophy</div>
+              <div class="perk">Certificates of Excellence</div>
+              <div class="perk">Industry Recognition</div>
+            </div>
           </div>
+          <div class="podium-block podium-block-2"><span>02</span></div>
         </div>
-        <div class="prize-card">
-          <div class="prize-rank">// RANK 02</div>
-          <div class="prize-place">Second Place</div>
-          <div class="prize-amount silver">₹TBA</div>
-          <div class="prize-perks">
-            <div class="perk">Cash Prize + Trophy</div>
-            <div class="perk">Certificates of Excellence</div>
-            <div class="perk">Industry Recognition</div>
+
+        <!-- 1st Place -->
+        <div class="podium-slot first">
+          <div class="podium-card champion">
+            <div class="winner-badge">CHAMPION</div>
+            <div class="podium-medal">🥇</div>
+            <div class="podium-rank">// RANK 01</div>
+            <div class="podium-place">First Place</div>
+            <div class="prize-amount gold">₹30,000</div>
+            <div class="podium-perks">
+              <div class="perk">Cash Prize + Trophy</div>
+              <div class="perk">Certificates of Excellence</div>
+              <div class="perk">Internship Opportunities</div>
+              <div class="perk">Mentorship Access</div>
+            </div>
           </div>
+          <div class="podium-block podium-block-1"><span>01</span></div>
         </div>
-        <div class="prize-card">
-          <div class="prize-rank">// RANK 03</div>
-          <div class="prize-place">Third Place</div>
-          <div class="prize-amount bronze">₹TBA</div>
-          <div class="prize-perks">
-            <div class="perk">Cash Prize + Trophy</div>
-            <div class="perk">Certificates of Excellence</div>
-            <div class="perk">Industry Recognition</div>
+
+        <!-- 3rd Place -->
+        <div class="podium-slot third">
+          <div class="podium-card">
+            <div class="podium-medal">🥉</div>
+            <div class="podium-rank">// RANK 03</div>
+            <div class="podium-place">Third Place</div>
+            <div class="prize-amount bronze">₹5,000</div>
+            <div class="podium-perks">
+              <div class="perk">Cash Prize + Trophy</div>
+              <div class="perk">Certificates of Excellence</div>
+              <div class="perk">Industry Recognition</div>
+            </div>
           </div>
+          <div class="podium-block podium-block-3"><span>03</span></div>
         </div>
       </div>
-
       <p
-        style="font-family:var(--mono);font-size:.58rem;color:rgba(200,200,200,.18);letter-spacing:.1em;text-transform:uppercase;margin-top:1.5rem;text-align:center">
+        style="font-family:var(--mono);font-size:.58rem;color:rgba(150,150,150,.4);letter-spacing:.1em;text-transform:uppercase;margin-top:1.5rem;text-align:center">
         * Prize amounts to be announced. All participants receive certificates of participation.</p>
     </div>
   </section>
@@ -390,14 +407,60 @@
     rg();
 
     // Scroll reveal
-    const obs = new IntersectionObserver(entries => {
+    // ── SCROLL REVEAL ANIMATIONS ──
+    const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)' }
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed');
+          revealObserver.unobserve(e.target);
+        }
       });
-    }, { threshold: .12 });
-    document.querySelectorAll('.tl-item,.prize-card,.special-card,.stat-cell,.sponsor-cell').forEach(el => {
-      el.style.cssText += 'opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease';
-      obs.observe(el);
+    }, { threshold: 0.1 });
+
+    // Stagger per group (each group resets to index 0)
+    const staggerGroups = [
+      '.tl-item',
+      '.stat-cell',
+      '.sponsor-cell',
+      '.contact-block',
+    ];
+    staggerGroups.forEach(selector => {
+      document.querySelectorAll(selector).forEach((el, i) => {
+        el.classList.add('reveal-up');
+        el.style.transitionDelay = `${i * 0.1}s`;
+        revealObserver.observe(el);
+      });
+    });
+
+    // No stagger — single items
+    document.querySelectorAll('.register-box').forEach(el => {
+      el.classList.add('reveal-up');
+      revealObserver.observe(el);
+    });
+
+    // Fade left — 2nd place card
+    document.querySelectorAll('.podium-slot.second').forEach(el => {
+      el.classList.add('reveal-left');
+      revealObserver.observe(el);
+    });
+
+    // Fade up — 1st place card (slight delay for drama)
+    document.querySelectorAll('.podium-slot.first').forEach(el => {
+      el.classList.add('reveal-up');
+      el.style.transitionDelay = '0.15s';
+      revealObserver.observe(el);
+    });
+
+    // Fade right — 3rd place card
+    document.querySelectorAll('.podium-slot.third').forEach(el => {
+      el.classList.add('reveal-right');
+      revealObserver.observe(el);
+    });
+
+    // Scale in — section headers
+    document.querySelectorAll('.section-header').forEach(el => {
+      el.classList.add('reveal-scale');
+      revealObserver.observe(el);
     });
 
     // Register
