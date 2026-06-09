@@ -56,7 +56,9 @@
 }
 
 html {
-  scroll-behavior: smooth
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -65,6 +67,7 @@ body {
   font-family: var(--body);
   font-size: 16px;
   overflow-x: hidden;
+  width: 100%;
   cursor: crosshair
 }
 
@@ -283,7 +286,8 @@ nav {
   position: relative;
   display: inline-block;
   letter-spacing: .02em;
-  text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1)
+  text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
 }
 
 .hero-title::before,
@@ -1739,48 +1743,147 @@ input {
   line-height: 1;
 }
 
-@media(max-width:800px) {
+/* ══════════════════════════════════════
+   RESPONSIVE — TABLET (≤ 800px)
+══════════════════════════════════════ */
+@media (max-width: 800px) {
 
-  .about-grid,
-  .prizes-grid,
-  .contact-grid {
-    grid-template-columns: 1fr
-  }
+  /* NAV */
+  .nav-links { display: none }
+  nav { padding: .8rem 1.2rem }
+  .nav-cta { font-size: .65rem; padding: .45rem .9rem }
 
-  .special-prizes {
-    grid-template-columns: 1fr 1fr
-  }
+  /* GENERAL */
+  .floating-deco { display: none !important }
 
-  .nav-links {
-    display: none
+  /* HERO */
+  #hero {
+    padding: 6rem 1.2rem 4rem;
   }
+  .hero-inner { padding: 0 }
+  .hero-title {
+    display: block;
+    font-size: 9vw;
+    letter-spacing: 0;
+    text-align: center;
+  }
+  #hero, .hero-inner { overflow: hidden; width: 100% }
+  .hero-sub { font-size: .75rem; letter-spacing: .4em }
+  .hero-tagline { font-size: .95rem }
+  .hero-badges { gap: .4rem }
+  .badge { font-size: .55rem; padding: .3rem .7rem }
+  .hero-eyebrow { font-size: .55rem }
 
-  .sponsors-row {
-    flex-direction: column
-  }
+  .countdown { gap: .5rem; margin-bottom: 2rem }
+  .cd-box { min-width: 65px; padding: .5rem }
+  .cd-num { font-size: 2rem }
 
   .warning-box,
-  .tracker-panel {
-    display: none
+  .tracker-panel { display: none }
+
+  /* ABOUT */
+  .about-grid { grid-template-columns: 1fr }
+  .about-stat-grid { grid-template-columns: repeat(2, 1fr) }
+
+  /* PODIUM */
+  .podium-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .podium-slot { max-width: 100%; width: 100% }
+  .podium-slot.second,
+  .podium-slot.first,
+  .podium-slot.third { order: unset }
+  /* Stack order: 1st, 2nd, 3rd */
+  .podium-slot.first  { order: 1 }
+  .podium-slot.second { order: 2 }
+  .podium-slot.third  { order: 3 }
+  .podium-block-1,
+  .podium-block-2,
+  .podium-block-3 { height: 48px }
+  .podium-card:hover,
+  .podium-card.champion:hover {
+    transform: none !important;
   }
 
-  .countdown {
-    gap: .5rem;
-    margin-bottom: 2rem;
-  }
+  /* TIMELINE */
+  .timeline-wrap { padding-left: 1.2rem }
 
-  .cd-box {
-    min-width: 65px;
-    padding: .5rem;
-  }
+  /* PRIZES / CONTACT / SPONSORS */
+  .prizes-grid,
+  .contact-grid { grid-template-columns: 1fr }
+  .sponsors-row { flex-direction: column }
 
-  .cd-num {
-    font-size: 2rem;
-  }
+  /* FOOTER */
+  .footer-deco { display: none }
+  .main-footer { padding: 2rem 1rem 1.5rem }
+  .footer-logo { font-size: 1.8rem }
+  .social-links { gap: .8rem }
+  .social-icon { width: 36px; height: 36px; font-size: .9rem }
 }
 
-@media(max-width:480px) {
-  .special-prizes {
-    grid-template-columns: 1fr
+/* ══════════════════════════════════════
+   RESPONSIVE — MOBILE (≤ 480px)
+══════════════════════════════════════ */
+@media (max-width: 480px) {
+
+  /* GENERAL */
+  .container { padding: 0 1rem }
+  section { padding: 4rem 0 }
+
+  /* HERO */
+  #hero {
+    padding: 5rem 1rem 3rem;
+  }
+  .hero-title {
+    font-size: 8vw;
+    letter-spacing: 0;
+  }
+  .hero-badges { flex-wrap: wrap; justify-content: center; gap: .35rem }
+  .hero-eyebrow { font-size: .5rem; white-space: normal; text-align: center; line-height: 1.6 }
+  .hero-tagline { font-size: .85rem }
+  .badge { font-size: .5rem }
+  .hero-cta { flex-direction: column; gap: .75rem; align-items: center }
+  .btn-primary, .btn-outline { width: 100%; max-width: 260px; text-align: center }
+
+  /* COUNTDOWN */
+  .countdown { gap: .4rem }
+  .cd-box { min-width: 58px; padding: .4rem }
+  .cd-num { font-size: 1.7rem }
+  .cd-label { font-size: .45rem }
+
+  /* ABOUT STATS */
+  .about-stat-grid { grid-template-columns: repeat(2, 1fr); gap: .75rem }
+  .stat-num { font-size: 2.5rem }
+
+  /* SECTION TITLES */
+  .section-title { font-size: clamp(2rem, 10vw, 3rem) }
+
+  /* PODIUM */
+  .podium-card { padding: 1.5rem 1rem 1rem }
+  .podium-medal { font-size: 2rem }
+  .podium-place { font-size: 1.1rem }
+  .prize-amount { font-size: 1.8rem }
+
+  /* TIMELINE */
+  .tl-item { padding: 1.2rem 1rem }
+  .tl-title { font-size: 1rem }
+
+  /* REGISTER */
+  .register-form { flex-direction: column; gap: .75rem }
+  .reg-input { width: 100% }
+  .register-form .btn-primary { width: 100% }
+
+  /* CONTACT */
+  .map-container iframe { height: 220px }
+
+  /* FOOTER */
+  .footer-copyright { font-size: .55rem }
+  .footer-tagline { font-size: .55rem; letter-spacing: .15em }
+
+  /* Style parallax on small screens (performance-friendly size) */
+  body > div[style*="position: fixed"][style*="Share Tech Mono"] {
+    font-size: 1.2rem !important;
   }
 }

@@ -4,10 +4,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HARDWIRED — Hackathon</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap"
-    rel="stylesheet">
+  <title>HARDWIRED — 30-Hour Hardware Hackathon</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="HARDWIRED — 30-Hour Hardware Hackathon at MEC">
+  <meta name="description" content="Join HARDWIRED, the premier 30-hour hardware, IoT, and robotics hackathon hosted by ISTE Student Chapter at Marian Engineering College, Trivandrum.">
+  <meta name="keywords" content="hackathon, hardware, IoT, robotics, ISTE, Marian Engineering College, MEC, engineering, student chapter, Trivandrum">
+  <meta name="author" content="ISTE Student Chapter MEC">
+  <link rel="canonical" href="https://www.istemec-hardwired.site/">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.istemec-hardwired.site/">
+  <meta property="og:title" content="HARDWIRED — 30-Hour Hardware Hackathon">
+  <meta property="og:description" content="Join HARDWIRED, the premier 30-hour hardware, IoT, and robotics hackathon hosted by ISTE Student Chapter at Marian Engineering College.">
+  <meta property="og:image" content="https://www.istemec-hardwired.site/og-image.jpg"> <!-- Ensure an og-image.jpg exists on the server -->
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://www.istemec-hardwired.site/">
+  <meta property="twitter:title" content="HARDWIRED — 30-Hour Hardware Hackathon">
+  <meta property="twitter:description" content="Join HARDWIRED, the premier 30-hour hardware, IoT, and robotics hackathon hosted by ISTE Student Chapter at Marian Engineering College.">
+  <meta property="twitter:image" content="https://www.istemec-hardwired.site/og-image.jpg">
+
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -687,6 +707,79 @@
       requestAnimationFrame(animateCanvas);
     }
     animateCanvas();
+
+    // ── PARALLAX FLOATING ELEMENTS ──
+    const floatSymbols = [
+      { text: '</>',  x: '4%',   top: 1.1,  speed: 0.15, size: '2.4rem', color: '#CC0000', rotate: -12 },
+      { text: '01',   x: '90%',  top: 1.5,  speed: 0.25, size: '2rem',   color: '#111',    rotate: 0   },
+      { text: '⊕',   x: '7%',   top: 2.2,  speed: 0.20, size: '3rem',   color: '#CC0000', rotate: 18  },
+      { text: '{ }',  x: '87%',  top: 2.9,  speed: 0.12, size: '2.5rem', color: '#111',    rotate: 8   },
+      { text: '10',   x: '3%',   top: 3.6,  speed: 0.28, size: '2rem',   color: '#CC0000', rotate: 0   },
+      { text: '⊞',   x: '88%',  top: 4.2,  speed: 0.18, size: '2.8rem', color: '#111',    rotate: -8  },
+      { text: '>>',   x: '5%',   top: 4.9,  speed: 0.22, size: '2.2rem', color: '#CC0000', rotate: 4   },
+      { text: '///',  x: '84%',  top: 5.5,  speed: 0.16, size: '2rem',   color: '#111',    rotate: -4  },
+      { text: '⚡',   x: '3%',   top: 6.2,  speed: 0.30, size: '2.4rem', color: '#CC0000', rotate: 0   },
+      { text: '0xFF', x: '90%',  top: 6.8,  speed: 0.20, size: '1.8rem', color: '#111',    rotate: 6   },
+    ];
+
+    const floatEls = floatSymbols.map(s => {
+      const el = document.createElement('div');
+      el.textContent = s.text;
+      Object.assign(el.style, {
+        position:      'fixed',
+        left:          s.x,
+        top:           '0px',
+        fontFamily:    "'Share Tech Mono', monospace",
+        fontSize:      s.size,
+        color:         s.color,
+        opacity:       '0',
+        pointerEvents: 'none',
+        zIndex:        '9997',
+        willChange:    'transform, opacity',
+        userSelect:    'none',
+        transition:    'none',
+      });
+      el._anchorY  = s.top;   // multiplier of viewH where it "lives" in the doc
+      el._speed    = s.speed;
+      el._rotate   = s.rotate;
+      document.body.appendChild(el);
+      return el;
+    });
+
+    let pfTicking = false;
+    function updateParallax() {
+      const scrollY = window.scrollY;
+      const viewH   = window.innerHeight;
+
+      floatEls.forEach(el => {
+        // World Y position of the anchor (relative to document)
+        const worldY = el._anchorY * viewH;
+        // How much this element has drifted due to parallax
+        const drift  = scrollY * el._speed;
+        // Its current screen Y (0 = top of viewport, viewH = bottom)
+        const screenY = worldY - scrollY + drift;
+
+        // Normalise: 0 at top of viewport, 1 at bottom
+        const norm = screenY / viewH;
+
+        // Fade in/out: full when norm ≈ 0.5, invisible at edges
+        const t = 1 - Math.abs(norm - 0.5) * 2.2;
+        const maxOpacity = window.innerWidth > 800 ? 0.45 : 0.15;
+        const opacity = Math.max(0, Math.min(1, t)) * maxOpacity;
+
+        el.style.opacity   = opacity;
+        el.style.transform = `translateY(${screenY}px) rotate(${el._rotate}deg)`;
+      });
+
+      pfTicking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!pfTicking) {
+        requestAnimationFrame(updateParallax);
+        pfTicking = true;
+      }
+    });
   </script>
 </body>
 
