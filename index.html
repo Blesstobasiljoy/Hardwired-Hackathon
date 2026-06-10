@@ -7,24 +7,24 @@
   <title>HARDWIRED — 30-Hour Hardware Hackathon</title>
   
   <!-- Primary Meta Tags -->
-  <meta name="title" content="HARDWIRED — 30-Hour Hardware Hackathon at MEC">
-  <meta name="description" content="Join HARDWIRED, the premier 30-hour hardware, IoT, and robotics hackathon hosted by ISTE Student Chapter at Marian Engineering College, Trivandrum.">
-  <meta name="keywords" content="hackathon, hardware, IoT, robotics, ISTE, Marian Engineering College, MEC, engineering, student chapter, Trivandrum">
+  <meta name="title" content="HARDWIRED Hackathon — 30-Hour Hardware Hackathon at MEC">
+  <meta name="description" content="Join the HARDWIRED Hackathon, the premier 30-hour hardware, IoT, and robotics hackathon hosted by ISTE MEC (istemec) Student Chapter at Marian Engineering College, Trivandrum.">
+  <meta name="keywords" content="hardwired hackathon, istemec, hackathon, hardware, IoT, robotics, ISTE, Marian Engineering College, MEC, engineering, student chapter, Trivandrum, hardwired">
   <meta name="author" content="ISTE Student Chapter MEC">
   <link rel="canonical" href="https://www.istemec-hardwired.site/">
 
   <!-- Open Graph / Facebook / LinkedIn -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.istemec-hardwired.site/">
-  <meta property="og:title" content="HARDWIRED — 30-Hour Hardware Hackathon">
-  <meta property="og:description" content="Join HARDWIRED, the premier 30-hour hardware, IoT, and robotics hackathon hosted by ISTE Student Chapter at Marian Engineering College.">
+  <meta property="og:title" content="HARDWIRED Hackathon — 30-Hour Hardware Hackathon at MEC">
+  <meta property="og:description" content="Join the HARDWIRED Hackathon, the premier 30-hour hardware, IoT, and robotics hackathon hosted by ISTE MEC (istemec) Student Chapter at Marian Engineering College.">
   <meta property="og:image" content="https://www.istemec-hardwired.site/og-image.jpg"> <!-- Ensure an og-image.jpg exists on the server -->
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://www.istemec-hardwired.site/">
-  <meta property="twitter:title" content="HARDWIRED — 30-Hour Hardware Hackathon">
-  <meta property="twitter:description" content="Join HARDWIRED, the premier 30-hour hardware, IoT, and robotics hackathon hosted by ISTE Student Chapter at Marian Engineering College.">
+  <meta property="twitter:title" content="HARDWIRED Hackathon — 30-Hour Hardware Hackathon at MEC">
+  <meta property="twitter:description" content="Join the HARDWIRED Hackathon, the premier 30-hour hardware, IoT, and robotics hackathon hosted by ISTE MEC (istemec) Student Chapter at Marian Engineering College.">
   <meta property="twitter:image" content="https://www.istemec-hardwired.site/og-image.jpg">
 
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
@@ -44,11 +44,12 @@
       <li><a href="#sponsors">Sponsors</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="#register" class="nav-cta">Register Now</a>
+    <a href="https://makemypass.com/event/hardwired-hackathon" target="_blank" class="nav-cta">Register Now</a>
   </nav>
 
   <!-- ── HERO ─────────────────────────────── -->
-  <section id="hero">
+  <section id="hero" style="position: relative; overflow: hidden;">
+    <div id="explosionContainer" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;"></div>
     <canvas id="heroCanvas"></canvas>
 
     <div class="tracker-panel left">
@@ -92,7 +93,7 @@
       </div>
 
       <div class="hero-cta">
-        <a href="#register" class="btn-primary">Register Now</a>
+        <a href="https://makemypass.com/event/hardwired-hackathon" target="_blank" class="btn-primary">Register Now</a>
         <a href="#about" class="btn-outline">Explore</a>
       </div>
       <div class="hero-scroll">
@@ -102,8 +103,26 @@
     </div>
   </section>
 
+  <!-- ── SKEWED MARQUEE ─────────────────────────────── -->
+  <section id="marquee-section">
+    <div class="marquee-container">
+      <div class="marquee-row marquee-left">
+        <div class="marquee-content">
+          <span>HARDWARE &bull; IOT &bull; ROBOTICS &bull; AI &bull; EMBEDDED &bull; CIRCUITS &bull; LOGIC &bull; HARDWARE &bull; IOT &bull; ROBOTICS &bull; AI &bull; EMBEDDED &bull; CIRCUITS &bull; LOGIC &bull; </span>
+          <span>HARDWARE &bull; IOT &bull; ROBOTICS &bull; AI &bull; EMBEDDED &bull; CIRCUITS &bull; LOGIC &bull; HARDWARE &bull; IOT &bull; ROBOTICS &bull; AI &bull; EMBEDDED &bull; CIRCUITS &bull; LOGIC &bull; </span>
+        </div>
+      </div>
+      <div class="marquee-row marquee-right">
+        <div class="marquee-content">
+          <span>INNOVATE &bull; BUILD &bull; HACK &bull; DEPLOY &bull; CREATE &bull; ENGINEER &bull; PROTOTYPE &bull; INNOVATE &bull; BUILD &bull; HACK &bull; DEPLOY &bull; CREATE &bull; ENGINEER &bull; PROTOTYPE &bull; </span>
+          <span>INNOVATE &bull; BUILD &bull; HACK &bull; DEPLOY &bull; CREATE &bull; ENGINEER &bull; PROTOTYPE &bull; INNOVATE &bull; BUILD &bull; HACK &bull; DEPLOY &bull; CREATE &bull; ENGINEER &bull; PROTOTYPE &bull; </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── ABOUT ─────────────────────────────── -->
-  <section id="about">
+  <section id="about" style="position: relative; overflow: hidden;">
     <div class="floating-deco warning" style="top: 15%; left: 5%;">⚠</div>
     <div class="floating-deco cross" style="bottom: 20%; right: 5%;">+</div>
     <div class="container">
@@ -311,32 +330,6 @@
     </div>
   </section>
 
-  <!-- ── REGISTER ─────────────────────────────── -->
-  <section id="register">
-    <div class="container">
-      <div class="register-inner">
-        <div class="register-box">
-          <div class="corner-deco tl"></div>
-          <div class="corner-deco tr"></div>
-          <div class="corner-deco bl"></div>
-          <div class="corner-deco br"></div>
-          <p class="reg-eyebrow">// Enter the Grid</p>
-          <h2 class="register-title">Register for <span style="color: var(--red);">HARD</span><span
-              style="color: #111;">WIRED</span></h2>
-          <p class="register-desc">Form your team of 2–4. Drop your email below to be first in line — receive updates,
-            problem statements, and the official invite the moment registration opens.</p>
-          <div class="register-form">
-            <input class="reg-input" type="email" placeholder="your@email.com" id="emailInput" />
-            <button class="btn-primary" onclick="handleReg()">Notify Me</button>
-          </div>
-          <div class="register-note">
-            Full registration portal opens soon &nbsp;·&nbsp; Teams of 2–4 &nbsp;·&nbsp; All disciplines welcome
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ── CONTACT ─────────────────────────────── -->
   <section id="contact">
     <div class="container">
@@ -482,14 +475,6 @@
       el.classList.add('reveal-scale');
       revealObserver.observe(el);
     });
-
-    // Register
-    function handleReg() {
-      const v = document.getElementById('emailInput').value.trim();
-      if (!v || !v.includes('@')) { alert('Please enter a valid email.'); return; }
-      alert('You\'re on the list! We\'ll reach out when registrations open.');
-      document.getElementById('emailInput').value = '';
-    }
 
     // Custom Cursor
     const cursor = document.querySelector('.custom-cursor');
@@ -654,21 +639,32 @@
     document.addEventListener('mousemove', (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY + window.scrollY; // adjust for scroll
-
-      if (trkX && trkY) {
-        trkX.innerText = e.clientX.toString().padStart(4, '0');
-        trkY.innerText = e.clientY.toString().padStart(4, '0');
-      }
+      // Save clientX/Y for UI update in animation loop
+      mouse.clientX = e.clientX;
+      mouse.clientY = e.clientY;
     });
 
     document.addEventListener('mouseleave', () => {
       mouse.x = null;
       mouse.y = null;
+      mouse.clientX = null;
+      mouse.clientY = null;
     });
+
+    // Throttle DOM updates for UI tracker
+    let lastTrkX = '', lastTrkY = '';
 
     function animateCanvas() {
       if (!canvas) return;
       ctx.clearRect(0, 0, width, height);
+      
+      // Batch DOM update inside RAF
+      if (mouse.clientX != null && trkX && trkY) {
+        const newX = mouse.clientX.toString().padStart(4, '0');
+        const newY = mouse.clientY.toString().padStart(4, '0');
+        if (newX !== lastTrkX) { trkX.innerText = newX; lastTrkX = newX; }
+        if (newY !== lastTrkY) { trkY.innerText = newY; lastTrkY = newY; }
+      }
 
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
@@ -677,6 +673,10 @@
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
+          
+          // Early exit before expensive sqrt operation
+          if (Math.abs(dx) > 120 || Math.abs(dy) > 120) continue;
+
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < 120) {
@@ -692,6 +692,10 @@
         if (mouse.x != null && mouse.y != null) {
           const dx = particles[i].x - mouse.x;
           const dy = particles[i].y - mouse.y;
+          
+          // Early exit for mouse distance
+          if (Math.abs(dx) > 180 || Math.abs(dy) > 180) continue;
+          
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < 180) {
@@ -780,6 +784,69 @@
         pfTicking = true;
       }
     });
+
+    // ── DATA DISPERSAL ANIMATION (HERO SECTION) ──
+    const techSymbols = ['⚙', '</>', '{ }', '⊞', '⚡', '///', '0xFF', 'SYS', 'NET', '⚠', '>>', '[]', '01'];
+    const explosionContainer = document.getElementById('explosionContainer');
+    const explosionEls = [];
+    
+    // Generate the symbols hidden in the center
+    for(let i=0; i<30; i++) {
+      const el = document.createElement('div');
+      el.className = 'explosion-element';
+      
+      const innerSpan = document.createElement('span');
+      innerSpan.className = 'float-span';
+      innerSpan.textContent = techSymbols[Math.floor(Math.random() * techSymbols.length)];
+      // Randomize float animation delay so they bob asynchronously
+      innerSpan.style.animationDelay = '-' + (Math.random() * 6).toFixed(2) + 's';
+      
+      el.appendChild(innerSpan);
+      
+      // Randomize color slightly (red vs dark gray vs light gray)
+      const randColor = Math.random();
+      if(randColor > 0.8) el.style.color = 'var(--red)';
+      else if(randColor > 0.4) el.style.color = '#333';
+      else el.style.color = 'rgba(0,0,0,0.1)';
+      
+      // Randomize size
+      el.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+      
+      explosionContainer.appendChild(el);
+      explosionEls.push(el);
+    }
+
+    // Force scroll to top on reload to prevent browser caching scroll position
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    // Trigger explosion immediately on load
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        explosionEls.forEach((el, index) => {
+          el.classList.add('fired');
+          
+          // Calculate destination. Strictly alternate left (1) and right (-1)
+          const side = (index % 2 === 0) ? 1 : -1;
+          // X stays between 20vw and 45vw from center (50vw is the edge)
+          const distX = side * (Math.random() * 25 + 20); 
+          // Y is more constrained (-30% to +30%)
+          const distY = (Math.random() - 0.5) * 60;
+          // Random rotation
+          const rot = (Math.random() - 0.5) * 360;
+          
+          // Apply delay for a staggered burst effect
+          el.style.transitionDelay = (Math.random() * 0.4) + 's';
+          
+          // CSS handles the actual easing and animation
+          el.style.transform = `translate(calc(-50% + ${distX}vw), calc(-50% + ${distY}vh)) scale(1) rotate(${rot}deg)`;
+          el.style.opacity = '0.5';
+        });
+      }, 500); // 500ms delay to let the page render first
+    });
+
   </script>
 </body>
 
