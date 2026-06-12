@@ -1892,17 +1892,25 @@ input {
     align-items: center;
     gap: 1.5rem;
   }
-  .podium-slot { max-width: 100%; width: 100% }
-  .podium-slot.second,
-  .podium-slot.first,
-  .podium-slot.third { order: unset }
-  /* Stack order: 1st, 2nd, 3rd */
-  .podium-slot.first  { order: 1 }
-  .podium-slot.second { order: 2 }
-  .podium-slot.third  { order: 3 }
-  .podium-block-1,
-  .podium-block-2,
-  .podium-block-3 { height: 48px }
+  .podium-slot { 
+    max-width: 100%; 
+    width: 100%; 
+    flex-direction: row; 
+    align-items: stretch; 
+  }
+  .podium-card { flex: 1; }
+  .podium-block { 
+    width: 48px; 
+    height: auto !important; 
+    margin-top: 0; 
+    writing-mode: vertical-rl; 
+    transform: rotate(180deg); 
+  }
+  
+  /* Stack order and block positions (left/right alternating) */
+  .podium-slot.first  { order: 1; flex-direction: row-reverse; }
+  .podium-slot.second { order: 2; flex-direction: row; }
+  .podium-slot.third  { order: 3; flex-direction: row-reverse; }
   .podium-card:hover,
   .podium-card.champion:hover {
     transform: none !important;
@@ -1965,10 +1973,43 @@ input {
   .section-title { font-size: clamp(2rem, 10vw, 3rem) }
 
   /* PODIUM */
-  .podium-card { padding: 1.5rem 1rem 1rem }
-  .podium-medal { font-size: 2rem }
-  .podium-place { font-size: 1.1rem }
-  .prize-amount { font-size: 1.8rem }
+  .podium-card { 
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    text-align: left;
+    padding: 1.25rem 1rem;
+    gap: 0.15rem 0.75rem;
+  }
+  .podium-medal { 
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    margin: 0;
+    font-size: 2.5rem;
+  }
+  .podium-rank {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    text-align: left;
+  }
+  .podium-place { 
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    font-size: 1.15rem;
+  }
+  .prize-amount { 
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: right;
+  }
+  .winner-badge {
+    display: none;
+  }
 
   /* TIMELINE */
   .tl-item { padding: 1.2rem 1rem }
